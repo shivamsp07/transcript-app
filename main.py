@@ -97,6 +97,9 @@ def main():
             if st.button("Try This"):
                 video_url = 'https://www.youtube.com/watch?v=twG4mr6Jov0'
 
+        st.markdown("---")
+        st.markdown("Developed by Shivam Pawar")
+
     if not video_url:
         st.warning("Please enter a valid YouTube Video URL.")
         st.stop()
