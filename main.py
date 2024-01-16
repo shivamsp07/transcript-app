@@ -93,9 +93,9 @@ def main():
 
         # Example URL in sidebar expander
         with st.expander('Example URL'):
-            st.code('https://www.youtube.com/watch?v=twG4mr6Jov0')
+            st.code('https://youtu.be/LXQcmQknGOA')
             if st.button("Try This"):
-                video_url = 'https://www.youtube.com/watch?v=twG4mr6Jov0'
+                video_url = 'https://youtu.be/LXQcmQknGOA'
 
         st.markdown("---")
         st.markdown("Developed by Shivam Pawar")
