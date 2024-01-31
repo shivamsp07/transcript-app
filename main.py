@@ -6,7 +6,6 @@ from time import sleep
 
 ASSEMBLY_AI_API_KEY = '1ec305ccbc00486c832b541c2d584e98'
 
-
 def read_file(filename, chunk_size=5242880):
     with open(filename, 'rb') as _file:
         while True:
@@ -14,7 +13,6 @@ def read_file(filename, chunk_size=5242880):
             if not data:
                 break
             yield data
-
 
 def download_and_extract_audio(video_url, output_path):
     yt = YouTube(video_url)
@@ -28,7 +26,6 @@ def download_and_extract_audio(video_url, output_path):
     st.success(f"✅ Audio downloaded successfully.")
 
     return audio_file_path, yt.title
-
 
 def transcribe_yt(audio_path):
     headers = {'authorization': ASSEMBLY_AI_API_KEY}
@@ -53,7 +50,6 @@ def transcribe_yt(audio_path):
         st.warning(f"Error starting transcription: {transcript_input_response.text}")
         return None
 
-    # Get transcript ID
     transcript_id = transcript_input_response.json().get("id")
     if not transcript_id:
         st.warning("Error retrieving transcript ID.")
@@ -82,16 +78,13 @@ def transcribe_yt(audio_path):
     else:
         return None
 
-
 def main():
     st.title("YouTube Transcription App")
 
-    # Sidebar with input fields
     with st.sidebar:
         st.subheader("Input Options")
         video_url = st.text_input("Enter YouTube Video URL:")
 
-        # Example URL in sidebar expander
         with st.expander('Example URL'):
             st.code('https://youtu.be/LXQcmQknGOA')
             if st.button("Try This"):
@@ -99,6 +92,7 @@ def main():
 
         st.markdown("---")
         st.markdown("Developed by Shivam Pawar")
+        st.markdown("[Let's Connect](https://www.linkedin.com/in/shivamsp07/)")
 
     if not video_url:
         st.warning("Please enter a valid YouTube Video URL.")
@@ -108,12 +102,10 @@ def main():
     os.makedirs(output_path, exist_ok=True)
     audio_file_path, yt_title = download_and_extract_audio(video_url, output_path)
 
-    # Display title below the YouTube Video URL input
     st.subheader(f"Title: {yt_title}")
 
     st.info('Processing YouTube video...')
 
-    # Add animation (e.g., spinner) instead of progress bar
     with st.spinner("Transcribing uploaded file in progress..."):
         transcription_result = transcribe_yt(audio_file_path)
 
@@ -122,7 +114,6 @@ def main():
 
     os.remove(audio_file_path)
     st.success(f"Deleted temporary audio file: {audio_file_path}")
-
 
 if __name__ == "__main__":
     main()
